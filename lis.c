@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 12:05:36 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/03 10:47:59 by avaures          ###   ########.fr       */
+/*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
+/*   Updated: 2022/03/03 17:00:02 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h" 
-int	swap_tab(s_data *stack)
-{
-	int	tmp;
+#include "push_swap.h"
 
-	tmp = stack->tab[1];
-	stack->tab[1] = stack->tab[0];
-	stack->tab[0] = tmp;
-	return (0);	
+int found_smallest(s_data *a)
+{
+	int 	i;
 
 }
-
-int swap_sa(s_data *a, s_data *b)
+int	stack_tmp(s_data *a)
 {
-	(void) b;
-	return (swap_tab(a));
-}
+	s_data	tmp;
+	int	i;
 
-int swap_sb(s_data *a, s_data *b)
-{
-	(void) a;
-	return (swap_tab(b));
-}
+	i = 0;
+	tmp.tab = a->tab;
 
-int swap_ss(s_data *a, s_data *b)
-{
-	swap_tab(a);
-	swap_tab(b);
-	return (0);
 }

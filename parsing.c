@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:01:18 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/02 17:40:53 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/03 18:13:22 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -18,7 +18,7 @@ int	valid_arg(char *str)
 	i = 0;
 	if (!str[i])
 		return (1);
-	if (str[i] == '+' || str[i] == '-')
+	if (str[i] == '-')
 		i++;
 	while (str[i])
 	{
@@ -67,10 +67,38 @@ int	check_double(int *tab, int size, int nb)
 int	*get_tab(char **arg, int nb_arg)
 {
 	int	i;
+	int	j;
 	int	*stack;
 
-	i = 1;
-	stack = malloc(sizeof(int) * (nb_arg - 1));
+	i = 0;
+	j = 1;
+	stack = malloc(sizeof(int) * (nb_arg));
+	if (!stack)
+		return (0);
+	while (j < nb_arg)
+	{
+		if (valid_arg(arg[j]) == 1 || check_overflow(arg[j]) == 1\
+		|| check_double(stack, i, ft_atoi(arg[j])))
+		{
+			free(stack);
+			ft_printf("invalid arguments\n");
+			return (NULL);
+		}
+		stack[i] = ft_atoi(arg[j]);
+		i++;
+		j++;
+	}
+	return (stack);
+}
+
+int	*get_tab_long(char **arg, int nb_arg)
+{
+	int	i;
+	int	j;
+	int	*stack;
+
+	i = 0;
+	stack = malloc(sizeof(int) * (nb_arg));
 	if (!stack)
 		return (0);
 	while (i < nb_arg)
@@ -87,8 +115,10 @@ int	*get_tab(char **arg, int nb_arg)
 	}
 	return (stack);
 }
+
+/*
 int main(int argc, char **argv)
 {
 	int	*tab = get_tab(argv, argc); 
 	return (0);
-}
+}*/

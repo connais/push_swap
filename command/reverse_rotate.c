@@ -6,13 +6,12 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:42 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/02 17:32:15 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/03 10:47:40 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-static int	reverse_rotate_tab(s_data *stack)
+#include "../push_swap.h"
+int	reverse_rotate_tab(s_data *stack)
 {
 	int	i;
 	int	tmp;
@@ -21,15 +20,15 @@ static int	reverse_rotate_tab(s_data *stack)
 	if (stack->len >= 1)
 	{
 		tmp = stack->tab[0];
-		while (i < tab->len -1)
+		while (i < stack->len -1)
 		{
 			tmp2 = tmp;
 			tmp = stack->tab[i + 1];
 			stack->tab[i + 1] = tmp2;
 			i++;
 		}
-		tab->tab[0] = tmp;
-		retun (0);
+		stack->tab[0] = tmp;
+		return (0);
 	}
 	return (1);
 }

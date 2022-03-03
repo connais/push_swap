@@ -6,13 +6,13 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 13:55:26 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/02 17:37:46 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/03 11:55:43 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static int	push_top(s_data *a, s_data *b)
+int	push_top(s_data *a, s_data *b)
 {
 	int	i;
 	int	len;
@@ -35,10 +35,9 @@ static int	push_top(s_data *a, s_data *b)
 	return (0);
 }
 
-static int moove_top(s_data *b)
+int moove_top(s_data *b)
 {
 	int	i;
-	int	len;
 	int	tmp;
 	int	tmp2;
 	
@@ -60,16 +59,17 @@ static int moove_top(s_data *b)
 int push_a(s_data *a, s_data *b)
 {
 	push_top(a, b);
-	moove(b);
+	moove_top(b);
 	return (0);
 }
 
 int push_b(s_data *a, s_data *b)
 {
 	push_top(b, a);
-	moove(a);
+	moove_top(a);
 	return (0);
 }
+/*
 int main()
 {
 	s_data a;
@@ -90,4 +90,4 @@ int main()
 	push_top(&a, &b);
 	while (i++ < 4)
 		printf("%d\n", a.tab[i]);
-}
+}*/
