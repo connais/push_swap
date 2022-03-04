@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:01:18 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/03 18:13:22 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/03 18:18:47 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -75,7 +75,7 @@ int	*get_tab(char **arg, int nb_arg)
 	stack = malloc(sizeof(int) * (nb_arg));
 	if (!stack)
 		return (0);
-	while (j < nb_arg)
+	while (i < nb_arg)
 	{
 		if (valid_arg(arg[j]) == 1 || check_overflow(arg[j]) == 1\
 		|| check_double(stack, i, ft_atoi(arg[j])))
