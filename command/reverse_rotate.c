@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:42 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/03 10:47:40 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/08 10:55:46 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	reverse_rotate_tab(s_data *stack)
 	i = 0;
 	if (stack->len >= 1)
 	{
-		tmp = stack->tab[0];
+		tmp = stack->tab[i];
 		while (i < stack->len -1)
 		{
 			tmp2 = tmp;
@@ -51,3 +51,28 @@ int	reverse_rrr(s_data *a, s_data *b)
 	return (reverse_rotate_tab(b));
 	return (0);
 }
+/*
+int main()
+{
+	s_data a;
+	s_data b;
+
+	int i = 0;
+	a.tab = malloc(sizeof(int) * 4);
+	a.len = 4;
+	while (i < 4)
+	{
+		a.tab[i] = i + 1;
+		printf("%d\n", a.tab[i]);
+		i++;
+	}
+
+	i = 0;
+	reverse_rra(&a, &b);
+	while (i < 4)
+	{
+		printf("%d\n", a.tab[i]);
+		i++;
+	}
+}
+*/

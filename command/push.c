@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 13:55:26 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/03 11:55:43 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/07 19:58:58 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,23 @@ int main()
 	int i = 0;
 	a.tab = malloc(sizeof(int) * 4);
 	b.tab = malloc(sizeof(int) * 4);
-	while (i++ < 4)
+	a.len = 4;
+	b.len = 4;
+	while (i < 4)
 	{
 		a.tab[i] = i + 1;
-		b.tab[i] = i + 1;
-		printf("%d\n", a.tab[i]);
+		b.tab[i] = i + 2;
+		printf("a[%d] : %d\n", i, a.tab[i]);
+		printf("b[%d] : %d\n", i, b.tab[i]);
+		i++;
 	}
 	b.tab[0] = 10;
 
 	i = 0;
-	push_top(&a, &b);
-	while (i++ < 4)
+	push_a(&a, &b);
+	while (i < 4)
+	{
 		printf("%d\n", a.tab[i]);
+		i++;
+	}
 }*/

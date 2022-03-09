@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:05:36 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/03 10:47:59 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/07 18:50:54 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,31 @@ int swap_ss(s_data *a, s_data *b)
 	swap_tab(b);
 	return (0);
 }
+/*
+int main()
+{
+	s_data a;
+	s_data b;
+	int i = 0;
+
+	//a = malloc(sizeof(s_data));
+	//b = malloc(sizeof(s_data));
+	a.len = 3;
+	a.tab = malloc(sizeof(int) * a.len);
+	a.tab[0] = 1;
+	a.tab[1] = 2;
+	a.tab[2] = 3;
+	while(i < a.len)
+	{
+		printf("%d \n", a.tab[i]);
+		i++;
+	}
+	swap_sa(&a, &b);
+	i = 0;
+	while(i < a.len)
+	{
+		printf("%d \n", a.tab[i]);
+		i++;
+	}
+	return (0);
+}*/

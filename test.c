@@ -11,6 +11,7 @@ int	sort_tab_3(s_data *a, s_data *b)
 		swap_sa(a, b);
 	return (0);
 }
+/*
 int main(int argc, char **argv)
 {
 	s_data *a;
@@ -53,3 +54,4 @@ int main(int argc, char **argv)
 	}
 	return (0);
 }
+*/
