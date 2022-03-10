@@ -1,4 +1,4 @@
-SRC = parsing.c test.c split.c lis.c
+SRC = parsing.c test.c split.c lis.c lismore.c
 
 NAME = push_swap
 
