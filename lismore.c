@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/10 11:08:53 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:29:48 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,20 @@ int	max(int *array, int len)
 {
 	int	max;
 	int	i;
-	
+	int	found;
+
+	found = 0;
 	i = 0;
 	max = array[i];
-	while (++i < len)
+	while (i < len)
+	{
 		if (array[i] > max)
+		{
 			max = array[i];
-	return (max);
+			found = i;
+			printf("i : %d", i);
+		}
+		i++;
+	}
+	return (found);
 }
