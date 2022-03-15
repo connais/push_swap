@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/14 16:14:00 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:23:59 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -159,6 +159,7 @@ int	*make_b(s_data a, int	*lis, int lenlis)
 	return (b);
 	
 }
+/*
 int main()
 {
 	s_data a;
@@ -185,10 +186,11 @@ int main()
 	lisfine = determine_lis(&a);
 	if (!a.tab || !lisfine)
 		return (1);
-/*	while (i < 3)
+	while (i < 3)
 	{
 		printf("lis[%d] : %d\n", i, lisfine[i]);
 		i++;
-	}*/
+	}
 	return (0);
 }
+*/

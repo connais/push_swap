@@ -6,11 +6,39 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/14 15:29:48 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:36:30 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int min(s_data a)
+{
+	int i = 1;
+	int min = a.tab[0];
+
+	while (i < a.len)
+	{
+		if (a.tab[i] < min)
+			min = a.tab[i];
+		i++;
+	}
+	return (min);
+}
+
+int maxi(s_data a)
+{
+	int i = 1;
+	int max = a.tab[0];
+
+	while (i < a.len)
+	{
+		if (a.tab[i] > max)
+			max = a.tab[i];
+		i++;
+	}
+	return (max);
+}
 
 int found_position(s_data *a)
 {
@@ -29,6 +57,7 @@ int found_position(s_data *a)
 		}
 	return (position);
 }
+
 int found_smallest(s_data *a)
 {
 	int	position;
@@ -41,6 +70,7 @@ int found_smallest(s_data *a)
 			smallest = a->tab[position];
 	return (smallest);
 }
+
 int	max(int *array, int len)
 {
 	int	max;

@@ -17,6 +17,15 @@ int      is_in_charset(char c, char charset);
 int      count_words(const char *str, char charset);
 int      word_lenght(const char *str, char charset);
 int      ft_strndup(char **dest, const char *src, unsigned int n);
+int min(s_data a);
+int maxi(s_data a);
+int indice_min(s_data a);
+int indice_max(s_data a);
+int	*tabl_diff(int place, s_data a);
+int	determine_place(int place, s_data a);
+void determine_coords_a(s_data a, s_data b, int **coords);
+void determine_coords_b(s_data b, int **coords);
+void	sort_tab(int **tabl, int *found, s_data, s_data b);
 char    	**ft_split(const char *str, char charset);
 
 #endif
