@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:38:55 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 12:20:31 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:39:36 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	found_best(int *found, int **shot, s_data b)
 	found[1] = better; //pour push d'une stack a l'autre il faut un coup
 	return ;
 }
-int main(int argc, char **argv)
+/*
+int main()
 {
 	s_data a;
 	s_data b;
@@ -108,7 +109,9 @@ int main(int argc, char **argv)
 //		while (i < 3)
 //			printf("%d\n", a->tab[i++]);
 	}
-/*	
+	
+	a.tab = malloc(sizeof(int) * 10);
+	b.tab = malloc(sizeof(int) * 4);
 	a.tab[0] = 3;
 	a.tab[1] = 8;
 	a.tab[2] = 9;
@@ -124,25 +127,9 @@ int main(int argc, char **argv)
 
 	b.len = 4;
 	
-*/	
 
-//	a.tab = malloc(sizeof(int) * 10);
-	b.tab = malloc(sizeof(int) * a.len);
-	int i = 1;
-	while (i < a.len)
-	{
-		b.tab[i] = a.tab[i];
-		i++;
-	}
-	i = 1;
-	while (i < a.len)
-	{
-		a.tab[i] = 0;
-		i++;
-	}
-	a.len = 1;
+	int i = 0;
 	int ** tabl = malloc(sizeof(int) * b.len);
-	i = 0;
 	while(i < b.len) 
 	{	
   	  	tabl[i] = malloc(sizeof(int) * 2);
@@ -176,7 +163,7 @@ int main(int argc, char **argv)
 		i++;
 	}
 	ft_printf("%d\n", j);
-/*	i = 0;
+	i = 0;
 	while (i < a.len)
 	{
 		printf("a.tab[%d] : %d\n", i, a.tab[i]);
@@ -188,5 +175,5 @@ int main(int argc, char **argv)
 		printf("b.tab[%d] : %d\n", i, b.tab[i]);
 		i++;
 	}
-*/
-}
+
+}*/

@@ -6,166 +6,178 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/15 15:23:59 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:54:20 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
-void	startsmall(s_data *a)
-{
-	s_data	*b;
-	int	position;
-	int	i;
 
-	position = found_position(a);
-	i = 0;
-	if (position <= a->len/2)
-		while (position > 0)
-		{
-			rotate_ra(a, b);
-			position--;
-		}
-	else
-		while (position < a->len)
-		{
-			reverse_rra(a, b);		
-			position++;
-		}
-	return ;
-}
-
-int	lislen(s_data *a)
+int	look_for_smallest_num(s_data a)
 {
-	int	*alllen;
 	int	i;
 	int	j;
+	int	tmp;
 
 	i = 0;
-	j = 1;
-
-	alllen = malloc(sizeof(int) * a->len);
-	if (!alllen)
-		return (1);
-	alllen[0] = 1;
-	while (j < a->len)
-	{
-		alllen[j] = 1;
-		while (i <= j - 1)
-		{
-			if (a->tab[i] <= a->tab[j] && alllen[j] < alllen[i] + 1)
-				alllen[j] = alllen[i] + 1;
-			i++;
-		}
-		i = 0;
-		j++;
-	}
-	i = 0;
-	while(i < a->len)
-	{
-		printf("alllen[%d] : %d\n", i, alllen[i]);
-		i++;
-	}
+	tmp = a.tab[0];
+	j = 0;
 	
-	return (max(alllen, a->len));
-}
-
-int	*lis(s_data *a)
-{
-	int	*alllen;
-	int	*indice;
-	int	i;
-	int	j;
-
-	i = 0;
-	indice = malloc(sizeof(int) * a->len);
-	alllen = malloc(sizeof(int) * a->len);
-	if (!indice || !alllen)
-		return (NULL);
-	while (i < a->len)
+//	printf("a%d\n", a.len);
+	while (i < a.len)
 	{
-		indice[i] = -1;
-		i++;
-	}
-	i = 0;
-	j = 1;
-	alllen[0] = 1;
-	while (j < a->len)
-	{
-		alllen[j] = 1;
-		while (i <= j - 1)
+		if (tmp > a.tab[i])
 		{
-			if (a->tab[i] < a->tab[j] && alllen[j] < alllen[i] + 1)
-			{
-				alllen[j] = alllen[i] + 1;
-				indice[j] = i;
-			}
-			i++;
+//			printf("%d\n", a.tab[i]);
+			tmp = a.tab[i];
+			j = i;
 		}
-		i = 0;
-		j++;
-	}
-	i = 0;
-	while(i < a->len)
-	{
-		printf("indicev2v[%d] : %d\n", i, indice[i]);
 		i++;
 	}
-	free(alllen);
-	return (indice);
+	return (j);
 }
 
-int	*determine_lis(s_data *a)
+int	find_lis_max(s_data a, int *lis)
 {
-	int len = lislen(a);
-	int	*lisfine;
-	int	*indice = lis(a);
-	int i = 0;
-
-	lisfine = malloc(sizeof(int) * len);
-	if (!lisfine)
-		return (NULL);
-	printf("len : %d\n", len);
-	while (indice[len] != -1)
+	int	i;
+	int	lis_max;
+	int	max_pos;
+	i = 0;
+	lis_max = 1;
+	while (i < a.len)
 	{
-		len = indice[len];
-		lisfine[len] = a->tab[len];
-		printf("lisfine[%d] : %d\n", len, lisfine[len]);
+		if (lis_max < lis[i])
+		{
+			lis_max = lis[i];
+			max_pos = i;
+		}
+		i++;
 	}
-	return (lisfine);
+	return (lis_max);
 }
 
-int	*make_b(s_data a, int	*lis, int lenlis)
+int	find_max_pos(s_data a, int *lis)
 {
-	int	*b;
+	int	i;
+	int	lis_max;
+	int	max_pos;
+	i = 0;
+	lis_max = 1;
+	while (i < a.len)
+	{
+		if (lis_max < lis[i])
+		{
+			lis_max = lis[i];
+			max_pos = i;
+		}
+		i++;
+	}
+	return (max_pos);
+}
+
+void	place_it_on_top(s_data a, int min_pos)
+{
+	s_data b;
+
+	if (min_pos > a.len / 2)
+	{
+		while (min_pos < a.len)
+		{
+			rotate_ra(&a, &b);
+			min_pos++;
+		}
+	}
+	else
+	{
+		while (min_pos >= 0)
+		{
+			reverse_rra(&a, &b);
+			min_pos--;
+		}
+	}
+}
+
+int	*get_sub_sequence(s_data a, int *lis)
+{
 	int	i;
 	int	j;
 	int	k;
-	
-	i = -1;
-	j = -1;
-	k = 0;
-	b = malloc(sizeof(int) * a.len - lenlis);
-	if (!b)
+	int	*subsequence;
+
+	i = find_max_pos(a, lis);
+	k = find_lis_max(a, lis);
+	j = i - 1;
+	subsequence = malloc(sizeof(int) * k);
+	if (!subsequence)
 		return (NULL);
-	while (++i < a.len)
+	subsequence[k] = a.tab[i];
+	while (j >= 0)
 	{
-		while (++j < lenlis && a.tab[i] != lis[j])
-		if (j == lenlis)
+		if (lis[i] - lis[j] == 1)
 		{
-			b[k] = a.tab[i];
-			k++;
+			k--;
+			subsequence[k] = a.tab[j];
+			i = j;
 		}
-		j = -1;
+		j--;
 	}
-	return (b);
-	
+	free(lis);
+	return (subsequence);
 }
-/*
+
+int	*test_lis(s_data a)
+{
+	int	i;
+	int	j;
+	int 	*lis;
+
+	j = 0;
+	lis = malloc(sizeof(int) * a.len);
+	if (!lis)
+		return (NULL);
+	i = -1;
+	while (++i < a.len)
+		lis[i] = 1;
+	i = 1;
+	while (i < a.len)
+	{
+		while (j < i)
+		{
+			if (a.tab[i] > a.tab[j] && lis[i] < lis[j] + 1)
+				lis[i] = lis[j] + 1;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return(lis);
+}
+int *get_lis(s_data a)
+{
+	int i;
+	int	*lis;
+	
+	i = look_for_smallest_num(a);
+	if (i != 0)
+		place_it_on_top(a, i);
+	
+	lis = test_lis(a);
+	if (!lis)
+		return (NULL);
+	
+	lis = get_sub_sequence(a, lis);
+	i = 0;
+	while (i < a.len)
+	{
+		printf("lis[%d] : %d\n", i, lis[i]);
+		i++;
+	}
+	return (lis);
+}
 int main()
 {
 	s_data a;
 	int i = 0;
 	int *tab = malloc(sizeof(int) * 5);
-	int *lisfine;
+	int *lis;
 
 	if (!tab)
 		return (0);
@@ -177,20 +189,25 @@ int main()
 	a.len = 5;
 	a.tab = tab;
 	printf("helo\n");
-	startsmall(&a);
+/*	while (i < a.len)
+	{
+		printf("a[%d] : %d\n", i, a.tab[i]);
+		i++;
+	}*/
+	lis = get_lis(a);
+	if (!a.tab || !lis)
+		return (1);
+	i = 0;
 	while (i < a.len)
 	{
 		printf("a[%d] : %d\n", i, a.tab[i]);
 		i++;
 	}
-	lisfine = determine_lis(&a);
-	if (!a.tab || !lisfine)
-		return (1);
-	while (i < 3)
+	i = 0;
+	while (i < a.len)
 	{
-		printf("lis[%d] : %d\n", i, lisfine[i]);
+		printf("lis[%d] : %d\n", i, lis[i]);
 		i++;
 	}
 	return (0);
 }
-*/
