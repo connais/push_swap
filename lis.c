@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 18:12:06 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:28:34 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -174,6 +174,7 @@ int *get_lis(s_data a)
 	
 	return (lis);
 }
+/*
 int main()
 {
 	s_data a;
@@ -211,3 +212,4 @@ int main()
 	}
 	return (0);
 }
+*/

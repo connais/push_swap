@@ -6,6 +6,13 @@
 #include "command/command.h"
 #include <stdlib.h>
 
+int *get_lis(s_data a);
+int	*test_lis(s_data a);
+int	*get_sub_sequence(s_data a, int *lis);
+void	place_it_on_top(s_data a, int min_pos);
+int	find_max_pos(s_data a, int *lis);
+int	find_lis_max(s_data a, int *lis);
+int	look_for_smallest_num(s_data a);
 int     	valid_arg(char *str);                                                   
 int		check_overflow(char *str);
 int     	check_double(int *tab, int size, int nb);

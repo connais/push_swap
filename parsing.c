@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:01:18 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/03 18:18:47 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:51:12 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -115,10 +115,20 @@ int	*get_tab_long(char **arg, int nb_arg)
 	}
 	return (stack);
 }
-
 /*
 int main(int argc, char **argv)
 {
-	int	*tab = get_tab(argv, argc); 
+
+	int	*tab;
+
+	if (argc == 1)
+		return (ft_printf("invalid number of argument\n"));
+	if (argc == 2)
+		tab = get_tab_long(argv, argc);
+	else
+		tab = get_tab(argv, argc);
+	if (!tab)
+		return (1);
 	return (0);
-}*/
+}
+*/
