@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:43:23 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/15 14:37:18 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 11:48:55 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int indice_min(s_data a)
 	int min = a.tab[0];
 	int indice = 0;
 
-	while (i <= a.len/2)
+	while (i < a.len)
 	{
 		if (a.tab[i] < min)
 		{
@@ -26,16 +26,8 @@ int indice_min(s_data a)
 		}
 		i++;
 	}
-	i = a.len;		
-	while (i > a.len/2)
-	{
-		if (a.tab[i] < min)
-		{
-			min = a.tab[i];
-			indice = i - a.len;
-		}
-		i--;
-	}
+	if (indice > a.len/2)
+		indice = indice -a.len;
 	return (indice);
 }
 
@@ -45,7 +37,7 @@ int indice_max(s_data a)
 	int max = a.tab[0];
 	int indice = 0;
 
-	while (i <= a.len/2)
+	while (i < a.len)
 	{
 		if (a.tab[i] > max)
 		{
@@ -54,16 +46,9 @@ int indice_max(s_data a)
 		}
 		i++;
 	}
-	i = a.len - 1;
-	while (i > a.len/2)
-	{
-		if (a.tab[i] > max)
-		{
-			max = a.tab[i];
-			indice = i - a.len;
-		}
-		i--;
-	}
+
+	if (indice > a.len/2)
+		indice = indice -a.len;
 	return (indice);
 }
 int	*tabl_diff(int place, s_data a)
@@ -125,10 +110,10 @@ void determine_coords_a(s_data a, s_data b, int **coords)
 			if (b.tab[i] < min(a))
 				coords[i][0] = indice_min(a);
 			else
-				coords[i][0] = indice_max(a) + 1;
+				coords[i][0] = indice_max(a);
 		}
 		else
-			coords[i][0] = determine_place(b.tab[i], a) + 1;
+			coords[i][0] = determine_place(b.tab[i], a);
 		i++;
 	}
 	return ;
@@ -139,7 +124,7 @@ void determine_coords_b(s_data b, int **coords)
 	int	i;
 
 	i = 0;
-	printf("ok\n");
+//	printf("ok\n");
 	while (i <= b.len/2)
 	{
 		coords[i][1] = i;
