@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 17:54:20 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:12:06 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -119,6 +119,7 @@ int	*get_sub_sequence(s_data a, int *lis)
 		}
 		j--;
 	}
+	subsequence[0] = find_lis_max(a, lis);
 	free(lis);
 	return (subsequence);
 }
@@ -170,11 +171,13 @@ int *get_lis(s_data a)
 		printf("lis[%d] : %d\n", i, lis[i]);
 		i++;
 	}
+	
 	return (lis);
 }
 int main()
 {
 	s_data a;
+	s_data b;
 	int i = 0;
 	int *tab = malloc(sizeof(int) * 5);
 	int *lis;
@@ -189,22 +192,19 @@ int main()
 	a.len = 5;
 	a.tab = tab;
 	printf("helo\n");
-/*	while (i < a.len)
-	{
-		printf("a[%d] : %d\n", i, a.tab[i]);
-		i++;
-	}*/
 	lis = get_lis(a);
 	if (!a.tab || !lis)
 		return (1);
+	int lis_len = lis[0] + 1;
+	printf("lenlis : %d\n", lis_len);
 	i = 0;
 	while (i < a.len)
 	{
 		printf("a[%d] : %d\n", i, a.tab[i]);
 		i++;
 	}
-	i = 0;
-	while (i < a.len)
+	i = 1;
+	while (i < lis_len)
 	{
 		printf("lis[%d] : %d\n", i, lis[i]);
 		i++;
