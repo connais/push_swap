@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:38:55 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 20:50:02 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/17 21:09:02 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,27 @@ int main(int argc, char **argv)
 	}
 	if (argc > 2)
 	{
-		a.len = argc;
+		a.len = argc - 1;
 		a.tab = malloc(sizeof(int) * a.len);
 		a.tab = get_tab(argv, argc - 1);
 		if (!a.tab)
 			return (ft_printf("error of arguments3\n"), 0);
 	}
-
+	i = 0;
+	printf("a.len : %d\n", a.len);
+	while(i < a.len)
+	{
+		printf("a.tab[%d] : %d\n", i, a.tab[i]);
+		i++;
+	}
+//ok
 	lis = get_lis(a);
 	if (!lis)
 		return (1);
 
 	b.len = lis[0];
+
+	printf("b.len : %d\n", b.len);
 	a.len -= b.len;
 	i = 0;
 	int ** tabl = malloc(sizeof(int) * b.len);
@@ -112,36 +121,13 @@ int main(int argc, char **argv)
   	  	tabl[i] = malloc(sizeof(int) * 2);
 		i++;
 	}
-	printf("ok\n");
-	i = 0;
-	j = 1;
-	while (i < a.len)
-	{
-		while (j < b.len)
-		{
-			if (a.tab[i] == lis[j])
-			{
-				x = i;
-				while (x > 0)
-				{
-					rotate_ra(&a, &b);
-					ft_printf("ra\n");
-					x--;
-				}
-					push_b(&a, &b);
-				j++;
-			}
-		}
-		j = 1;
-
-		i++;
-	}
 	determine_coords_b(b, tabl);
 	determine_coords_a(a, b, tabl);
+	printf("ok\n");
 	int *found = malloc(sizeof(int) * 2);
 	i = 0;
 	j = 0;
-	while (i < 4)
+	while (i < b.len)
 	{
 		found_best(found, tabl, b);
 		j = sort_tab(tabl, found, a, b);
