@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:38:55 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 21:09:02 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/18 15:53:45 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	found_best(int *found, int **shot, s_data b)
 	found[1] = better; 
 	return ;
 }
+
 int main(int argc, char **argv)
 {
 	s_data	a;
@@ -76,6 +77,7 @@ int main(int argc, char **argv)
 	int	j;
 	char	**arg_long;
 	int	*lis;
+	int	*subsequence;
 	int	x;
 	if (argc == 1)
 		return (printf("Invalid number of argument\n"));
@@ -98,46 +100,49 @@ int main(int argc, char **argv)
 		if (!a.tab)
 			return (ft_printf("error of arguments3\n"), 0);
 	}
-	i = 0;
+	
+	lis = test_lis(a);
+	subsequence = get_lis(a);
+	if (!lis || !subsequence)
+		return (1);
 	printf("a.len : %d\n", a.len);
+	b.len = a.len - find_lis_max(a, lis);
+	b.tab = malloc(sizeof(int) * b.len);
+	printf("b.len : %d\n", b.len);
+	i = 0;
+	j = 0;
+	int len_sub = find_lis_max(a, lis);
 	while(i < a.len)
 	{
 		printf("a.tab[%d] : %d\n", i, a.tab[i]);
 		i++;
 	}
-//ok
-	lis = get_lis(a);
-	if (!lis)
-		return (1);
-
-	b.len = lis[0];
-
-	printf("b.len : %d\n", b.len);
-	a.len -= b.len;
 	i = 0;
-	int ** tabl = malloc(sizeof(int) * b.len);
-	while(i < b.len) 
-	{	
-  	  	tabl[i] = malloc(sizeof(int) * 2);
-		i++;
-	}
-	determine_coords_b(b, tabl);
-	determine_coords_a(a, b, tabl);
-	printf("ok\n");
-	int *found = malloc(sizeof(int) * 2);
-	i = 0;
-	j = 0;
-	while (i < b.len)
+	int vu = 0;
+	int indice = 0;
+	while(i < a.len)
 	{
-		found_best(found, tabl, b);
-		j = sort_tab(tabl, found, a, b);
-		a.len++;
-		b.len--;
-		determine_coords_b(b, tabl);
-		determine_coords_a(a, b, tabl);
+		printf("entrer\n");
+		printf("i : %d\n", i);
+		while (j < len_sub)
+		{
+			if (a.tab[i] == subsequence[j])
+			{
+				vu++;
+			}
+			j++;
+		}
+		printf("vu : %d\n", vu);
+		if (vu == 0)
+		{
+			printf("pas vu : %d\n", a.tab[i]);
+			place_it_on_top(a, i);
+			push_b(&a, &b);
+		}
+		vu = 0;
 		i++;
+		j = 0;
 	}
-	ft_printf("%d\n", j);
 	i = 0;
 	while (i < a.len)
 	{
@@ -148,6 +153,37 @@ int main(int argc, char **argv)
 	while (i < b.len)
 	{
 		printf("b.tab[%d] : %d\n", i, b.tab[i]);
+		i++;
+	}
+	printf("a.len : %d\n", a.len);
+	i = 0;
+	int ** tabl = malloc(sizeof(int) * b.len);
+	while(i < b.len) 
+	{	
+  	  	tabl[i] = malloc(sizeof(int) * 2);
+		i++;
+	}
+	int *found = malloc(sizeof(int) * 2);
+	i = 0;
+	j = 0;
+	while (i < b.len)
+	{
+		determine_coords_b(b, tabl);
+		determine_coords_a(a, b, tabl);
+		printf("ok\n");
+		found_best(found, tabl, b);
+		printf("found[%d] : %d found[%d] %d\n", 0, found[0], 1, found[1]);
+		j = sort_tab(tabl, found, a, b);
+		a.len++;
+		b.len--;
+		i++;
+	}
+	a.len = argc - 1;
+	printf("a.len : %d\n", a.len);
+	i = 0;
+	while (i < a.len)
+	{
+		printf("a.tab[%d] : %d\n", i, a.tab[i]);
 		i++;
 	}
 }

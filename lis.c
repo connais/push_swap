@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 21:25:35 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/18 14:46:29 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -21,12 +21,10 @@ int	look_for_smallest_num(s_data a)
 	tmp = a.tab[0];
 	j = 0;
 	
-//	printf("a%d\n", a.len);
 	while (i < a.len)
 	{
 		if (tmp > a.tab[i])
 		{
-//			printf("%d\n", a.tab[i]);
 			tmp = a.tab[i];
 			j = i;
 		}
@@ -103,7 +101,7 @@ int	*get_sub_sequence(s_data a, int *lis)
 	int	*subsequence;
 
 	i = find_max_pos(a, lis);
-	k = find_lis_max(a, lis);
+	k = find_lis_max(a, lis) - 1;
 	j = i - 1;
 	subsequence = malloc(sizeof(int) * k);
 	if (!subsequence)
@@ -119,8 +117,6 @@ int	*get_sub_sequence(s_data a, int *lis)
 		}
 		j--;
 	}
-	subsequence[0] = find_lis_max(a, lis);
-	
 	free(lis);
 	return (subsequence);
 }
@@ -149,13 +145,8 @@ int	*test_lis(s_data a)
 		}
 		j = 0;
 		i++;
+	}
 	i = 0;
-	while (i < a.len)
-	{
-		printf("lislis[%d] : %d\n", i, lis[i]);
-		i++;
-	}
-	}
 	return(lis);
 }
 int *get_lis(s_data a)
@@ -166,19 +157,10 @@ int *get_lis(s_data a)
 	i = look_for_smallest_num(a);
 	if (i != 0)
 		place_it_on_top(a, i);
-	i = 0;
-	while (i < a.len)
-	{
-		printf("aa.tab[%d] : %d\n", i, a.tab[i]);
-		i++;
-	}
 	lis = test_lis(a);
 	if (!lis)
 		return (NULL);
-	
 	lis = get_sub_sequence(a, lis);
-	
-	
 	return (lis);
 }
 /*
@@ -218,5 +200,4 @@ int main()
 		i++;
 	}
 	return (0);
-}
-*/
+}*/
