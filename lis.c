@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/18 14:46:29 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/18 17:24:16 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -33,42 +33,20 @@ int	look_for_smallest_num(s_data a)
 	return (j);
 }
 
-int	find_lis_max(s_data a, int *lis)
+void	find_lis_max(s_data a, int *lis)
 {
 	int	i;
-	int	lis_max;
-	int	max_pos;
-	i = 0;
-	lis_max = 1;
-	while (i < a.len)
-	{
-		if (lis_max < lis[i])
-		{
-			lis_max = lis[i];
-			max_pos = i;
-		}
-		i++;
-	}
-	return (lis_max);
-}
 
-int	find_max_pos(s_data a, int *lis)
-{
-	int	i;
-	int	lis_max;
-	int	max_pos;
 	i = 0;
-	lis_max = 1;
 	while (i < a.len)
 	{
-		if (lis_max < lis[i])
+		if (a.len_sub < lis[i])
 		{
-			lis_max = lis[i];
-			max_pos = i;
+			a.len_sub = lis[i];
+			a.max_pos = i;
 		}
 		i++;
 	}
-	return (max_pos);
 }
 
 void	place_it_on_top(s_data a, int min_pos)
@@ -100,8 +78,8 @@ int	*get_sub_sequence(s_data a, int *lis)
 	int	k;
 	int	*subsequence;
 
-	i = find_max_pos(a, lis);
-	k = find_lis_max(a, lis) - 1;
+	i = a.max_pos;
+	k = a.len_sub - 1;
 	j = i - 1;
 	subsequence = malloc(sizeof(int) * k);
 	if (!subsequence)
@@ -134,6 +112,7 @@ int	*test_lis(s_data a)
 	i = -1;
 	while (++i < a.len)
 		lis[i] = 1;
+	
 	i = 1;
 	while (i < a.len)
 	{
@@ -147,6 +126,11 @@ int	*test_lis(s_data a)
 		i++;
 	}
 	i = 0;
+	while (i < a.len)
+	{
+		printf("%d\n", lis[i]);
+		i++;
+	}
 	return(lis);
 }
 int *get_lis(s_data a)

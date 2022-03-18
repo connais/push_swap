@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:38:55 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/18 15:53:45 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/18 17:02:01 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,33 @@ int main(int argc, char **argv)
 	}
 	
 	lis = test_lis(a);
+//	i = 0;
+//	while(i < a.len)
+//	{
+//		printf("lis[%d] : %d\n", i, lis[i]);
+//		i++;
+//	}
 	subsequence = get_lis(a);
+	
 	if (!lis || !subsequence)
 		return (1);
-	printf("a.len : %d\n", a.len);
-	b.len = a.len - find_lis_max(a, lis);
+	int len_sub = find_lis_max(a, lis);
+//	printf("a.len : %d\n", a.len);
+//	printf("len_sub : %d\n", len_sub);
+	b.len = a.len - len_sub;
 	b.tab = malloc(sizeof(int) * b.len);
-	printf("b.len : %d\n", b.len);
+//	printf("b.len : %d\n", b.len);
 	i = 0;
 	j = 0;
-	int len_sub = find_lis_max(a, lis);
 	while(i < a.len)
 	{
 		printf("a.tab[%d] : %d\n", i, a.tab[i]);
+		i++;
+	}
+	i = 0;
+	while(i < len_sub)
+	{
+		printf("sub[%d] : %d\n", i, subsequence[i]);
 		i++;
 	}
 	i = 0;
@@ -122,8 +136,8 @@ int main(int argc, char **argv)
 	int indice = 0;
 	while(i < a.len)
 	{
-		printf("entrer\n");
-		printf("i : %d\n", i);
+//		printf("entrer\n");
+//		printf("i : %d\n", i);
 		while (j < len_sub)
 		{
 			if (a.tab[i] == subsequence[j])
@@ -132,30 +146,43 @@ int main(int argc, char **argv)
 			}
 			j++;
 		}
-		printf("vu : %d\n", vu);
+//		printf("vu : %d\n", vu);
 		if (vu == 0)
 		{
-			printf("pas vu : %d\n", a.tab[i]);
+//			printf("pas vu : %d\n", a.tab[i]);
 			place_it_on_top(a, i);
 			push_b(&a, &b);
+		}
+		else
+		{
+//			printf("vu : %d\n", a.tab[i]);
+			place_it_on_top(a, i);
+			rotate_ra(&a, &b);
 		}
 		vu = 0;
 		i++;
 		j = 0;
 	}
+//	printf("rrrra.len : %d\n", a.len);
 	i = 0;
 	while (i < a.len)
 	{
-		printf("a.tab[%d] : %d\n", i, a.tab[i]);
+		a.tab[i] = subsequence[i];
 		i++;
 	}
 	i = 0;
 	while (i < b.len)
 	{
-		printf("b.tab[%d] : %d\n", i, b.tab[i]);
+//		printf("rrrra.tab[%d] : %d\n", i, a.tab[i]);
 		i++;
 	}
-	printf("a.len : %d\n", a.len);
+	i = 0;
+	while (i < b.len)
+	{
+//		printf("b.tab[%d] : %d\n", i, b.tab[i]);
+		i++;
+	}
+//	printf("a.len : %d\n", a.len);
 	i = 0;
 	int ** tabl = malloc(sizeof(int) * b.len);
 	while(i < b.len) 
@@ -164,22 +191,24 @@ int main(int argc, char **argv)
 		i++;
 	}
 	int *found = malloc(sizeof(int) * 2);
+	determine_coords_b(b, tabl);
+	determine_coords_a(a, b, tabl);
 	i = 0;
 	j = 0;
 	while (i < b.len)
 	{
-		determine_coords_b(b, tabl);
-		determine_coords_a(a, b, tabl);
-		printf("ok\n");
+//		printf("ok\n");
 		found_best(found, tabl, b);
-		printf("found[%d] : %d found[%d] %d\n", 0, found[0], 1, found[1]);
+//		printf("found[%d] : %d found[%d] %d\n", 0, found[0], 1, found[1]);
 		j = sort_tab(tabl, found, a, b);
 		a.len++;
 		b.len--;
 		i++;
+		determine_coords_b(b, tabl);
+		determine_coords_a(a, b, tabl);
 	}
 	a.len = argc - 1;
-	printf("a.len : %d\n", a.len);
+//	printf("a.len : %d\n", a.len);
 	i = 0;
 	while (i < a.len)
 	{
