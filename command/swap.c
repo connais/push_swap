@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:05:36 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/07 18:50:54 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/21 17:33:48 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 int	swap_tab(s_data *stack)
 {
 	int	tmp;
-
+	
+	if (stack->len <= 1)
+		return (0);
 	tmp = stack->tab[1];
 	stack->tab[1] = stack->tab[0];
 	stack->tab[0] = tmp;

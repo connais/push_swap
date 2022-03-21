@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avaures <marvin@42->fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/18 17:24:16 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/21 19:02:15 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -33,31 +33,31 @@ int	look_for_smallest_num(s_data a)
 	return (j);
 }
 
-void	find_lis_max(s_data a, int *lis)
+void	find_lis_max(s_data *a)
 {
 	int	i;
 
 	i = 0;
-	while (i < a.len)
+	while (i < a->len)
 	{
-		if (a.len_sub < lis[i])
+		if (a->len_sub < a->lis[i])
 		{
-			a.len_sub = lis[i];
-			a.max_pos = i;
+			a->len_sub = a->lis[i];
+			a->max_pos = i;
 		}
 		i++;
 	}
 }
 
-void	place_it_on_top(s_data a, int min_pos)
+void	place_it_on_top(s_data *a, int min_pos)
 {
 	s_data b;
 
-	if (min_pos > a.len / 2)
+	if (min_pos > a->len / 2)
 	{
-		while (min_pos < a.len)
+		while (min_pos < a->len)
 		{
-			reverse_rra(&a, &b);
+			reverse_rra(a, &b);
 			min_pos++;
 		}
 	}
@@ -65,87 +65,71 @@ void	place_it_on_top(s_data a, int min_pos)
 	{
 		while (min_pos > 0)
 		{
-			rotate_ra(&a, &b);
+			rotate_ra(a, &b);
 			min_pos--;
 		}
 	}
 }
 
-int	*get_sub_sequence(s_data a, int *lis)
+void	get_sub_sequence(s_data *a)
 {
 	int	i;
 	int	j;
 	int	k;
-	int	*subsequence;
 
-	i = a.max_pos;
-	k = a.len_sub - 1;
+	i = a->max_pos;
+	k = a->len_sub - 1;
 	j = i - 1;
-	subsequence = malloc(sizeof(int) * k);
-	if (!subsequence)
-		return (NULL);
-	subsequence[k] = a.tab[i];
+	a->sub = malloc(sizeof(int) * k);
+	if (!a->sub)
+		return;
+	a->sub[k] = a->tab[i];
 	while (j >= 0)
 	{
-		if (lis[i] - lis[j] == 1)
+		if (a->lis[i] - a->lis[j] == 1)
 		{
 			k--;
-			subsequence[k] = a.tab[j];
+			a->sub[k] = a->tab[j];
 			i = j;
 		}
 		j--;
 	}
-	free(lis);
-	return (subsequence);
+	free(a->lis);
+	return ;
 }
 
-int	*test_lis(s_data a)
+void	test_lis(s_data *a)
 {
 	int	i;
 	int	j;
-	int 	*lis;
 
 	j = 0;
-	lis = malloc(sizeof(int) * a.len);
-	if (!lis)
-		return (NULL);
+	a->lis = malloc(sizeof(int) * a->len);
+
+	if (!a->lis)
+		return ;
 	i = -1;
-	while (++i < a.len)
-		lis[i] = 1;
-	
+	while (++i < a->len)
+		a->lis[i] = 1;
 	i = 1;
-	while (i < a.len)
+	while (i < a->len)
 	{
 		while (j < i)
 		{
-			if (a.tab[i] > a.tab[j] && lis[i] < lis[j] + 1)
-				lis[i] = lis[j] + 1;
+			if (a->tab[i] > a->tab[j] && a->lis[i] < a->lis[j] + 1)
+				a->lis[i] = a->lis[j] + 1;
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	i = 0;
-	while (i < a.len)
-	{
-		printf("%d\n", lis[i]);
-		i++;
-	}
-	return(lis);
+	return;
 }
-int *get_lis(s_data a)
+void	get_lis(s_data *a)
 {
-	int i;
-	int	*lis;
-	
-	i = look_for_smallest_num(a);
-	if (i != 0)
-		place_it_on_top(a, i);
-	lis = test_lis(a);
-	if (!lis)
-		return (NULL);
-	lis = get_sub_sequence(a, lis);
-	return (lis);
+	test_lis(a);
+	find_lis_max(a);
+	get_sub_sequence(a);
 }
 /*
 int main()
@@ -163,18 +147,18 @@ int main()
 	tab[2] = 1;
 	tab[3] = 2;
 	tab[4] = 42;
-	a.len = 5;
-	a.tab = tab;
+	a->len = 5;
+	a->tab = tab;
 	printf("helo\n");
 	lis = get_lis(a);
-	if (!a.tab || !lis)
+	if (!a->tab || !lis)
 		return (1);
 	int lis_len = lis[0] + 1;
 	printf("lenlis : %d\n", lis_len);
 	i = 0;
-	while (i < a.len)
+	while (i < a->len)
 	{
-		printf("a[%d] : %d\n", i, a.tab[i]);
+		printf("a[%d] : %d\n", i, a->tab[i]);
 		i++;
 	}
 	i = 1;
