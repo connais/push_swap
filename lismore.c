@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/22 17:33:41 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:53:02 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int maxi(s_data a)
 	}
 	return (max);
 }
+
 void	final_move(s_data *a)
 {
 	int	place;
@@ -57,6 +58,7 @@ void	final_move(s_data *a)
 			place++;
 		}
 }
+
 void	make_b(s_data *a, s_data *b)
 {
 	int vu;

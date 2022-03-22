@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:38:55 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/22 17:41:06 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 18:23:36 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,17 @@ int main(int argc, char **argv)
 	s_data	a;
 	s_data	b;
 	char	**arg_long;
+	int	len;
 
 	if (argc == 1)
 		return (printf("Invalid number of argument\n"));
 	if (argc == 2)
-	{
-		arg_long = ft_split(argv[1], ' ');
-		if (!arg_long)
-			return (ft_printf("error of arguments\n"), 0);
-		a.len = count_words(argv[1], ' ');
-		a.tab = malloc(sizeof(int) * a.len);
-		a.tab = get_tab_long(arg_long, a.len);
-		if (!a.tab)
-			return (ft_printf("error of arguments2\n"), 0);
-	}
+		set_two(&a, argv);
 	if (argc > 2)
-	{
-		a.len = argc - 1;
-		a.tab = malloc(sizeof(int) * a.len);
-		a.tab = get_tab(argv, argc - 1);
-		if (!a.tab)
-			return (ft_printf("error of arguments3\n"), 0);
-	}
+		set_more(&a, argc, argv);
+	if (!a.tab)
+		return(1);
+	len = a.len;
 	place_it_on_top(&a,min(a));
 	get_lis(&a);
 	if (!a.lis || !a.sub)
@@ -106,7 +95,7 @@ int main(int argc, char **argv)
 	make_b(&a, &b);
 	free(a.sub);
 	big_sort(&a, &b);
-	a.len = argc - 1;
+	a.len = len;
 	final_move(&a);
 	int	i = 0;
 	while (i < a.len)

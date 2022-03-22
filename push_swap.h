@@ -29,6 +29,8 @@ int indice_min(s_data a);
 int indice_max(s_data a);
 int	*tabl_diff(int place, s_data a);
 int	determine_place(int place, s_data a);
+int	set_more(s_data *a, int argc, char **argv);
+int	set_two(s_data *a, char **argv);
 void	final_move(s_data *a);
 void determine_coords_a(s_data a, s_data b, int **coords);
 void	make_b(s_data *a, s_data *b);

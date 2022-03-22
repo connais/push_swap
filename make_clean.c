@@ -6,12 +6,35 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:00:15 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/22 15:49:49 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 18:22:02 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
+int	set_more(s_data *a, int argc, char **argv)
+{
+	a->len = argc - 1;
+	a->tab = malloc(sizeof(int) * a->len);
+	a->tab = get_tab(argv, argc - 1);
+	if (!a->tab)
+		return (ft_printf("error of arguments3\n"), 0);
+}
+
+int	set_two(s_data *a, char **argv)
+{
+	char	**arg_long;
+
+	arg_long = ft_split(argv[1], ' ');
+	if (!arg_long)
+		return (ft_printf("error of arguments\n"), 0);
+	a->len = count_words(argv[1], ' ');
+	a->tab = malloc(sizeof(int) * a->len);
+	a->tab = get_tab_long(arg_long, a->len);
+	if (!a->tab)
+		return (ft_printf("error of arguments2\n"), 0);
+		return (0);
+}
 int	sort_tab(int **tabl, int *found, s_data a, s_data b)
 {
 	int		i;
@@ -61,29 +84,7 @@ int	sort_tab(int **tabl, int *found, s_data a, s_data b)
 				found[1]--;
 			}		
 	}
-/*
-	i = 0;
-	while (i < a.len)
-	{
-		printf("a.tab[%d] : %d\n", i, a.tab[i]);
-		i++;
-	}
-	i = 0;
-	while (i < b.len)
-	{
-		printf("b.tab[i] : %d\n", b.tab[i]);
-		i++;
-	}
-	
-*/	a.len++;
+	a.len++;
 	push_a(&a, &b);
-	if (a.tab[0] > a.tab[1])
-//	{
-//		swap_sa(&a, &b);
-//		ft_printf("sa\n");
-//		cpt++;
-//	}
-//	b.len--;
-//	printf("len_b : %d\n", b.len);
 	return(cpt);
 }
