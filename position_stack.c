@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:43:23 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 11:48:55 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:26:39 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,24 @@ int indice_max(s_data a)
 		indice = indice -a.len;
 	return (indice);
 }
+int	get_perfect_pos(int top, s_data a)
+{
+	int	i;
+
+	i = a.len - 1;
+	while (i > 0)
+	{
+		if (top < a.tab[i] && top > a.tab[i - 1])
+		{
+			if (i <= a.len/2)
+				return (i);
+			else
+				return (i - a.len);
+		}
+		i--;
+	}
+	return (0);
+}
 int	*tabl_diff(int place, s_data a)
 {
 	int	i;
@@ -65,6 +83,7 @@ int	*tabl_diff(int place, s_data a)
 	}
 	return (tab_diff);
 }
+
 int	determine_place(int place, s_data a)
 {
 	int	i;
@@ -78,7 +97,7 @@ int	determine_place(int place, s_data a)
 		return (1);
 	diff = tab_diff[0];
 	indice = 0;
-	while (++i <= a.len/2)
+	while (++i <= a.len)
 	{
 		if (diff > tab_diff[i])
 		{
@@ -86,18 +105,10 @@ int	determine_place(int place, s_data a)
 			indice = i;
 		}
 	}
-	i = a.len;
-	while (--i > a.len/2)
-	{
-		if (diff > tab_diff[i])
-		{
-			diff = tab_diff[i];
-			indice = i - a.len;
-		}
-	}
+		indice++;
+	free(tab_diff);
 	return (indice);
 }
-
 void determine_coords_a(s_data a, s_data b, int **coords)
 {
 	int	i;
@@ -106,14 +117,9 @@ void determine_coords_a(s_data a, s_data b, int **coords)
 	while (i < b.len)
 	{
 		if (b.tab[i] < min(a) || b.tab[i] > maxi(a))
-		{
-			if (b.tab[i] < min(a))
-				coords[i][0] = indice_min(a);
-			else
-				coords[i][0] = indice_max(a);
-		}
+			coords[i][0] = indice_min(a);
 		else
-			coords[i][0] = determine_place(b.tab[i], a);
+			coords[i][0] = get_perfect_pos(b.tab[i], a);
 		i++;
 	}
 	return ;

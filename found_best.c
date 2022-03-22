@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:38:55 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/21 19:21:16 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:41:06 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	found_best(int *found, int **shot, s_data b)
 			i++;
 		}
 	}
+//	printf("test2\n");
 	i = 0;
 	save_i = 0;
 	x = shot[0][0];
@@ -65,7 +66,7 @@ void	found_best(int *found, int **shot, s_data b)
 	}
 	cpy[save_i] = 1;
 	found[0] = save_i;
-	found[1] = better; 
+	found[1] = better;
 	return ;
 }
 
@@ -73,10 +74,8 @@ int main(int argc, char **argv)
 {
 	s_data	a;
 	s_data	b;
-	int	i;
-	int	j;
 	char	**arg_long;
-	int	x;
+
 	if (argc == 1)
 		return (printf("Invalid number of argument\n"));
 	if (argc == 2)
@@ -98,105 +97,18 @@ int main(int argc, char **argv)
 		if (!a.tab)
 			return (ft_printf("error of arguments3\n"), 0);
 	}
-	if (!a.lis || !a.sub)
-		return (1);
 	place_it_on_top(&a,min(a));
 	get_lis(&a);
-	printf("a.len : %d\n", a.len);
-	printf("len_sub : %d\n", a.len_sub);
+	if (!a.lis || !a.sub)
+		return (1);
 	b.len = a.len - a.len_sub;
 	b.tab = malloc(sizeof(int) * b.len);
-	printf("b.len : %d\n", b.len);
-	i = 0;
-	j = 0;
-	while(i < a.len)
-	{
-		printf("a.tab[%d] : %d\n", i, a.tab[i]);
-		i++;
-	}
-	i = 0;
-	while(i < a.len_sub)
-	{
-		printf("sub[%d] : %d\n", i, a.sub[i]);
-		i++;
-	}
-	i = 0;
-	int vu = 0;
-	int indice = 0;
-	while(i < a.len)
-	{
-		while (j < a.len_sub)
-		{
-			if (a.tab[i] == a.sub[j])
-			{
-				vu++;
-			}
-			j++;
-		}
-		if (vu == 0)
-		{
-			printf("pas vu : %d\n", a.tab[i]);
-			place_it_on_top(&a, i);
-			push_b(&a, &b);
-		}
-		else
-		{
-			printf("vu : %d\n", a.tab[i]);
-			place_it_on_top(&a, i);
-			rotate_ra(&a, &b);
-		}
-		vu = 0;
-		i++;
-		j = 0;
-	}
-	i = 0;
-	while(i < b.len)
-	{
-		printf("b.tab[%d] : %d\n", i, b.tab[i]);
-		i++;
-	}
-	i = 0;
-	while (i < a.len_sub)
-	{
-		a.tab[i] = a.sub[i];
-		i++;
-	}
+	make_b(&a, &b);
 	free(a.sub);
-	i = 0;
-//	a.len = a.len_sub;
-	int ** tabl = malloc(sizeof(int) * b.len);
-	while(i < b.len) 
-	{	
-  	  	tabl[i] = malloc(sizeof(int) * 2);
-		i++;
-	}
-	int *found = malloc(sizeof(int) * 2);
-	determine_coords_b(b, tabl);
-	determine_coords_a(a, b, tabl);
-	i = 0;
-	j = 0;
-	int k = 0;
-	while (b.len > 0)
-	{
-//		printf("ok\n");
-		found_best(found, tabl, b);
-//		printf("found[%d] : %d found[%d] %d\n", 0, found[0], 1, found[1]);
-		while(k < a.len)
-		{
-			printf("->a.tab[%d] : %d\n", k, a.tab[k]);
-			k++;
-		}
-		j = sort_tab(tabl, found, a, b);
-		a.len++;
-		b.len--;
-		i++;
-		k = 0;
-		determine_coords_b(b, tabl);
-		determine_coords_a(a, b, tabl);
-	}
+	big_sort(&a, &b);
 	a.len = argc - 1;
-//	printf("a.len : %d\n", a.len);
-	i = 0;
+	final_move(&a);
+	int	i = 0;
 	while (i < a.len)
 	{
 		printf("a.tab[%d] : %d\n", i, a.tab[i]);

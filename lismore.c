@@ -6,12 +6,11 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/15 14:36:30 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:33:41 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 int min(s_data a)
 {
 	int i = 1;
@@ -39,56 +38,78 @@ int maxi(s_data a)
 	}
 	return (max);
 }
-
-int found_position(s_data *a)
+void	final_move(s_data *a)
 {
-	int	i;
-	int	position;
-	int	smallest;
+	int	place;
+	s_data	b;
 
-	i = 0;
-	position = 0;
-	smallest = a->tab[i];
-	while (++i < a->len)
-		if(smallest > a->tab[i])
+	place = indice_min(*a);
+	if (place > 0)
+		while (place > 0)
 		{
-			smallest = a->tab[i];
-			position = i;
+			rotate_ra(a, &b);
+			place--;
 		}
-	return (position);
+	else
+		while (place < 0)
+		{
+			reverse_rra(a, &b);
+			place++;
+		}
 }
-
-int found_smallest(s_data *a)
+void	make_b(s_data *a, s_data *b)
 {
-	int	position;
-	int	smallest;
+	int vu;
+	int indice;
+	int	j;
 
-	position = 0;
-	smallest = a->tab[position];
-	while (++position < a->len)
-		if(smallest > a->tab[position])
-			smallest = a->tab[position];
-	return (smallest);
-}
-
-int	max(int *array, int len)
-{
-	int	max;
-	int	i;
-	int	found;
-
-	found = 0;
-	i = 0;
-	max = array[i];
-	while (i < len)
+	j = 0;
+	vu = 0;
+	indice = 0;
+	while(a->len > a->len_sub)
 	{
-		if (array[i] > max)
+		while (j < a->len_sub)
 		{
-			max = array[i];
-			found = i;
-			printf("i : %d", i);
+			if (a->tab[0] == a->sub[j])
+			{
+				vu++;
+			}
+			j++;
 		}
+		if (vu == 0)
+			push_b(a, b);
+		else
+			rotate_ra(a, b);
+		vu = 0;
+		j = 0;
+	}
+}
+
+void	big_sort(s_data *a, s_data *b)
+{
+	int i;
+	int *found;
+	int **tabl;
+
+	i = 0;
+	tabl = malloc(sizeof(int *) * (b->len));
+	while(i < b->len) 
+	{	
+  	  	tabl[i] = malloc(sizeof(int) * 2);
 		i++;
 	}
-	return (found);
+	found = malloc(sizeof(int) * 2);
+	if (!tabl || !found)
+		return;
+	while (b->len > 0)
+	{
+		determine_coords_b(*b, tabl);
+		determine_coords_a(*a, *b, tabl);
+		found_best(found, tabl, *b);
+		sort_tab(tabl, found, *a, *b);
+		a->len++;
+		b->len--;
+		i++;
+	}
+	free(found);
 }

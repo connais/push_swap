@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:00:15 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/18 15:43:45 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 15:49:49 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	sort_tab(int **tabl, int *found, s_data a, s_data b)
 	
 */	a.len++;
 	push_a(&a, &b);
-//	if (a.tab[0] > a.tab[1])
+	if (a.tab[0] > a.tab[1])
 //	{
 //		swap_sa(&a, &b);
 //		ft_printf("sa\n");

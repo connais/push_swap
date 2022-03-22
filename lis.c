@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42->fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/21 19:02:15 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/22 15:01:55 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -38,6 +38,7 @@ void	find_lis_max(s_data *a)
 	int	i;
 
 	i = 0;
+	a->len_sub = 0;
 	while (i < a->len)
 	{
 		if (a->len_sub < a->lis[i])
@@ -78,11 +79,12 @@ void	get_sub_sequence(s_data *a)
 	int	k;
 
 	i = a->max_pos;
-	k = a->len_sub - 1;
+	k = a->len_sub;
 	j = i - 1;
 	a->sub = malloc(sizeof(int) * k);
 	if (!a->sub)
 		return;
+	k--;
 	a->sub[k] = a->tab[i];
 	while (j >= 0)
 	{
