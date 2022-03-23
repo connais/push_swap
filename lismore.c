@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/22 17:53:02 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/23 18:39:12 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,19 @@ void	make_b(s_data *a, s_data *b)
 			j++;
 		}
 		if (vu == 0)
+		{
 			push_b(a, b);
+			ft_printf("pb\n");
+		}
 		else
+		{
 			rotate_ra(a, b);
+			ft_printf("ra\n");
+		}
 		vu = 0;
 		j = 0;
 	}
+	free(a->sub);
 }
 
 void	big_sort(s_data *a, s_data *b)
@@ -92,11 +99,13 @@ void	big_sort(s_data *a, s_data *b)
 	int i;
 	int *found;
 	int **tabl;
+	int	len;
 
+	len = b->len - 1;
 	i = 0;
 	tabl = malloc(sizeof(int *) * (b->len));
 	while(i < b->len) 
-	{	
+	{
   	  	tabl[i] = malloc(sizeof(int) * 2);
 		i++;
 	}
@@ -113,5 +122,10 @@ void	big_sort(s_data *a, s_data *b)
 		b->len--;
 		i++;
 	}
+	found_best(found, tabl, *b);
 	free(found);
+	while(len >= 0) 
+  	  	free(tabl[len--]);
+	free(tabl);
+	free(b->tab);
 }

@@ -6,6 +6,11 @@
 #include "command/command.h"
 #include <stdlib.h>
 
+typedef struct	coords
+{
+	int	x;
+	int	y;
+}coords
 void	get_lis(s_data *a);
 void	test_lis(s_data *a);
 void	get_sub_sequence(s_data *a);

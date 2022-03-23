@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:01:18 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/17 18:51:12 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/23 14:58:53 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -81,7 +81,7 @@ int	*get_tab(char **arg, int nb_arg)
 		|| check_double(stack, i, ft_atoi(arg[j])))
 		{
 			free(stack);
-			ft_printf("invalid arguments\n");
+			write(2, "Error\n", 6);
 			return (NULL);
 		}
 		stack[i] = ft_atoi(arg[j]);
@@ -94,7 +94,6 @@ int	*get_tab(char **arg, int nb_arg)
 int	*get_tab_long(char **arg, int nb_arg)
 {
 	int	i;
-	int	j;
 	int	*stack;
 
 	i = 0;
@@ -107,12 +106,19 @@ int	*get_tab_long(char **arg, int nb_arg)
 		|| check_double(stack, i, ft_atoi(arg[i])))
 		{
 			free(stack);
-			ft_printf("invalid arguments\n");
+			write(2, "Error\n", 6);
 			return (NULL);
 		}
 		stack[i] = ft_atoi(arg[i]);
 		i++;
 	}
+	i = 0;
+	while (arg[i])
+	{
+		free(arg[i]);
+		i++;
+	}
+	free(arg);
 	return (stack);
 }
 /*

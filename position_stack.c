@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:43:23 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/22 17:26:39 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/23 10:37:19 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void determine_coords_b(s_data b, int **coords)
 	int	i;
 
 	i = 0;
-//	printf("ok\n");
 	while (i <= b.len/2)
 	{
 		coords[i][1] = i;
