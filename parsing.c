@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:01:18 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/23 14:58:53 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/24 12:41:47 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -14,7 +14,7 @@
 int	valid_arg(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!str[i])
 		return (1);
@@ -30,7 +30,7 @@ int	valid_arg(char *str)
 	return (0);
 }
 
-int check_overflow(char *str)
+int	check_overflow(char *str)
 {
 	int	i;
 
@@ -77,7 +77,7 @@ int	*get_tab(char **arg, int nb_arg)
 		return (0);
 	while (i < nb_arg)
 	{
-		if (valid_arg(arg[j]) == 1 || check_overflow(arg[j]) == 1\
+		if (valid_arg(arg[j]) == 1 || check_overflow(arg[j]) == 1 \
 		|| check_double(stack, i, ft_atoi(arg[j])))
 		{
 			free(stack);
@@ -102,7 +102,7 @@ int	*get_tab_long(char **arg, int nb_arg)
 		return (0);
 	while (i < nb_arg)
 	{
-		if (valid_arg(arg[i]) == 1 || check_overflow(arg[i]) == 1\
+		if (valid_arg(arg[i]) == 1 || check_overflow(arg[i]) == 1 \
 		|| check_double(stack, i, ft_atoi(arg[i])))
 		{
 			free(stack);
@@ -112,12 +112,9 @@ int	*get_tab_long(char **arg, int nb_arg)
 		stack[i] = ft_atoi(arg[i]);
 		i++;
 	}
-	i = 0;
-	while (arg[i])
-	{
+	i = -1;
+	while (arg[++i])
 		free(arg[i]);
-		i++;
-	}
 	free(arg);
 	return (stack);
 }

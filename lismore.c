@@ -6,16 +6,19 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/23 18:39:12 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:39:31 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-int min(s_data a)
-{
-	int i = 1;
-	int min = a.tab[0];
 
+int	min(t_data a)
+{
+	int	i;
+	int	min;
+
+	i = 1;
+	min = a.tab[0];
 	while (i < a.len)
 	{
 		if (a.tab[i] < min)
@@ -25,11 +28,13 @@ int min(s_data a)
 	return (min);
 }
 
-int maxi(s_data a)
+int	maxi(t_data a)
 {
-	int i = 1;
-	int max = a.tab[0];
+	int	i;
+	int	max;
 
+	i = 1;
+	max = a.tab[0];
 	while (i < a.len)
 	{
 		if (a.tab[i] > max)
@@ -39,46 +44,44 @@ int maxi(s_data a)
 	return (max);
 }
 
-void	final_move(s_data *a)
+void	final_move(t_data *a)
 {
-	int	place;
-	s_data	b;
+	int		place;
+	t_data	b;
 
 	place = indice_min(*a);
 	if (place > 0)
+	{
 		while (place > 0)
 		{
 			rotate_ra(a, &b);
 			place--;
 		}
+	}
 	else
+	{
 		while (place < 0)
 		{
 			reverse_rra(a, &b);
 			place++;
 		}
+	}
 }
 
-void	make_b(s_data *a, s_data *b)
+void	make_b(t_data *a, t_data *b)
 {
-	int vu;
-	int indice;
-	int	j;
+	t_coords	var;
 
-	j = 0;
-	vu = 0;
-	indice = 0;
-	while(a->len > a->len_sub)
+	var.i = -1;
+	var.x = 0;
+	while (a->len > a->len_sub)
 	{
-		while (j < a->len_sub)
+		while (++var.i < a->len_sub)
 		{
-			if (a->tab[0] == a->sub[j])
-			{
-				vu++;
-			}
-			j++;
+			if (a->tab[0] == a->sub[var.i])
+				var.x++;
 		}
-		if (vu == 0)
+		if (var.x == 0)
 		{
 			push_b(a, b);
 			ft_printf("pb\n");
@@ -88,44 +91,23 @@ void	make_b(s_data *a, s_data *b)
 			rotate_ra(a, b);
 			ft_printf("ra\n");
 		}
-		vu = 0;
-		j = 0;
+		var.x = 0;
+		var.i = -1;
 	}
 	free(a->sub);
 }
 
-void	big_sort(s_data *a, s_data *b)
+int	**set_tab_sort(int **tabl, t_data *b)
 {
-	int i;
-	int *found;
-	int **tabl;
-	int	len;
+	int	i;
 
-	len = b->len - 1;
-	i = 0;
+	i = -1;
 	tabl = malloc(sizeof(int *) * (b->len));
-	while(i < b->len) 
-	{
-  	  	tabl[i] = malloc(sizeof(int) * 2);
-		i++;
-	}
-	found = malloc(sizeof(int) * 2);
-	if (!tabl || !found)
-		return;
-	while (b->len > 0)
-	{
-		determine_coords_b(*b, tabl);
-		determine_coords_a(*a, *b, tabl);
-		found_best(found, tabl, *b);
-		sort_tab(tabl, found, *a, *b);
-		a->len++;
-		b->len--;
-		i++;
-	}
-	found_best(found, tabl, *b);
-	free(found);
-	while(len >= 0) 
-  	  	free(tabl[len--]);
-	free(tabl);
-	free(b->tab);
+	if (!tabl)
+		return (NULL);
+	while (++i < b->len)
+		tabl[i] = malloc(sizeof(int) * 2);
+	if (!tabl)
+		return (NULL);
+	return (tabl);
 }

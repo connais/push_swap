@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lis.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avaures <marvin@42->fr>                     +#+  +:+       +#+        */
+/*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 16:46:37 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/22 15:01:55 by avaures          ###   ########.fr       */
+/*   Created: 2022/03/24 14:38:44 by avaures           #+#    #+#             */
+/*   Updated: 2022/03/24 15:37:36 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	look_for_smallest_num(s_data a)
+int	look_for_smallest_num(t_data a)
 {
 	int	i;
 	int	j;
@@ -20,7 +21,6 @@ int	look_for_smallest_num(s_data a)
 	i = 0;
 	tmp = a.tab[0];
 	j = 0;
-	
 	while (i < a.len)
 	{
 		if (tmp > a.tab[i])
@@ -33,7 +33,7 @@ int	look_for_smallest_num(s_data a)
 	return (j);
 }
 
-void	find_lis_max(s_data *a)
+void	find_lis_max(t_data *a)
 {
 	int	i;
 
@@ -50,9 +50,9 @@ void	find_lis_max(s_data *a)
 	}
 }
 
-void	place_it_on_top(s_data *a, int min_pos)
+void	place_it_on_top(t_data *a, int min_pos)
 {
-	s_data b;
+	t_data	b;
 
 	if (min_pos > a->len / 2)
 	{
@@ -72,7 +72,7 @@ void	place_it_on_top(s_data *a, int min_pos)
 	}
 }
 
-void	get_sub_sequence(s_data *a)
+void	get_sub_sequence(t_data *a)
 {
 	int	i;
 	int	j;
@@ -83,7 +83,7 @@ void	get_sub_sequence(s_data *a)
 	j = i - 1;
 	a->sub = malloc(sizeof(int) * k);
 	if (!a->sub)
-		return;
+		return ;
 	k--;
 	a->sub[k] = a->tab[i];
 	while (j >= 0)
@@ -100,14 +100,13 @@ void	get_sub_sequence(s_data *a)
 	return ;
 }
 
-void	test_lis(s_data *a)
+void	test_lis(t_data *a)
 {
 	int	i;
 	int	j;
 
 	j = 0;
 	a->lis = malloc(sizeof(int) * a->len);
-
 	if (!a->lis)
 		return ;
 	i = -1;
@@ -125,14 +124,9 @@ void	test_lis(s_data *a)
 		j = 0;
 		i++;
 	}
-	return;
+	return ;
 }
-void	get_lis(s_data *a)
-{
-	test_lis(a);
-	find_lis_max(a);
-	get_sub_sequence(a);
-}
+
 /*
 int main()
 {

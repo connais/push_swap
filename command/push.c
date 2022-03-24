@@ -6,62 +6,62 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 13:55:26 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/16 19:17:55 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:45:44 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	push_top(s_data *a, s_data *b)
+int	push_top(t_data *a, t_data *b)
 {
 	int	i;
 	int	tmp;
 	int	tmp2;
-	
+
 	i = 0;
 	if (!b->len)
 		return (1);
 	tmp = a->tab[0];
-	while(i < a->len - 1)
+	while (i < a->len - 1)
 	{
 		tmp2 = tmp;
 		tmp = a->tab[i + 1];
-		a->tab[i + 1] = tmp2; 
+		a->tab[i + 1] = tmp2;
 		i++;
 	}
 	a->tab[0] = b->tab[0];
 	return (0);
 }
 
-int moove_top(s_data *b)
+int	moove_top(t_data *b)
 {
 	int	i;
 	int	tmp;
 	int	tmp2;
-	
+
 	i = b->len - 1;
 	if (!b->len)
 		return (1);
 	tmp = b->tab[i];
-	while(i > 0)
+	while (i > 0)
 	{
 		tmp2 = tmp;
 		tmp = b->tab[i - 1];
-		b->tab[i - 1] = tmp2; 
+		b->tab[i - 1] = tmp2;
 		i--;
 	}
 	b->len--;
 	return (0);
 }
 
-int push_a(s_data *a, s_data *b)
+int	push_a(t_data *a, t_data *b)
 {
 	push_top(a, b);
 	moove_top(b);
 	return (0);
 }
 
-int push_b(s_data *a, s_data *b)
+int	push_b(t_data *a, t_data *b)
 {
 	push_top(b, a);
 	moove_top(a);

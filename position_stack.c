@@ -6,52 +6,13 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:43:23 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/23 10:37:19 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:33:27 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-int indice_min(s_data a)
-{
-	int i = 0;
-	int min = a.tab[0];
-	int indice = 0;
 
-	while (i < a.len)
-	{
-		if (a.tab[i] < min)
-		{
-			min = a.tab[i];
-			indice = i;
-		}
-		i++;
-	}
-	if (indice > a.len/2)
-		indice = indice -a.len;
-	return (indice);
-}
-
-int indice_max(s_data a)
-{
-	int i = 0;
-	int max = a.tab[0];
-	int indice = 0;
-
-	while (i < a.len)
-	{
-		if (a.tab[i] > max)
-		{
-			max = a.tab[i];
-			indice = i;
-		}
-		i++;
-	}
-
-	if (indice > a.len/2)
-		indice = indice -a.len;
-	return (indice);
-}
-int	get_perfect_pos(int top, s_data a)
+int	get_perfect_pos(int top, t_data a)
 {
 	int	i;
 
@@ -60,7 +21,7 @@ int	get_perfect_pos(int top, s_data a)
 	{
 		if (top < a.tab[i] && top > a.tab[i - 1])
 		{
-			if (i <= a.len/2)
+			if (i <= a.len / 2)
 				return (i);
 			else
 				return (i - a.len);
@@ -69,10 +30,12 @@ int	get_perfect_pos(int top, s_data a)
 	}
 	return (0);
 }
-int	*tabl_diff(int place, s_data a)
+
+int	*tabl_diff(int place, t_data a)
 {
 	int	i;
 	int	*tab_diff;
+
 	i = -1;
 	tab_diff = malloc(sizeof(int) * a.len);
 	while (++i < a.len)
@@ -84,12 +47,12 @@ int	*tabl_diff(int place, s_data a)
 	return (tab_diff);
 }
 
-int	determine_place(int place, s_data a)
+int	determine_place(int place, t_data a)
 {
 	int	i;
 	int	*tab_diff;
 	int	diff;
-	int indice;
+	int	indice;
 
 	i = -1;
 	tab_diff = tabl_diff(place, a);
@@ -109,7 +72,8 @@ int	determine_place(int place, s_data a)
 	free(tab_diff);
 	return (indice);
 }
-void determine_coords_a(s_data a, s_data b, int **coords)
+
+void	determine_coords_a(t_data a, t_data b, int **coords)
 {
 	int	i;
 
@@ -125,18 +89,18 @@ void determine_coords_a(s_data a, s_data b, int **coords)
 	return ;
 }
 
-void determine_coords_b(s_data b, int **coords)
+void	determine_coords_b(t_data b, int **coords)
 {
 	int	i;
 
 	i = 0;
-	while (i <= b.len/2)
+	while (i <= b.len / 2)
 	{
 		coords[i][1] = i;
 		i++;
 	}
 	i = b.len - 1;
-	while (i > b.len/2)
+	while (i > b.len / 2)
 	{
 		coords[i][1] = i - b.len;
 		i--;

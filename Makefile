@@ -1,4 +1,4 @@
-SRC = parsing.c test.c split.c lis.c lismore.c position_stack.c found_best.c make_clean.c 
+SRC = parsing.c split.c lis.c test.c lismore.c position_stack.c found_best.c make_clean.c main.c found_indice.c
 
 NAME = push_swap
 
