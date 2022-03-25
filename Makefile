@@ -16,7 +16,6 @@ FLAGS	= -Wall -Wextra -Werror
 
 OBJ = ${SRC:.c=.o}
 
-
 RM = rm -f
 
 all	: ${NAME}
