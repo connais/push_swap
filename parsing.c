@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:01:18 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 12:41:47 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/28 11:20:58 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
@@ -18,7 +18,7 @@ int	valid_arg(char *str)
 	i = 0;
 	if (!str[i])
 		return (1);
-	if (str[i] == '-')
+	if (str[i] == '-' && str[i + 1] >= '0' && '9' >= str[i + 1])
 		i++;
 	while (str[i])
 	{
