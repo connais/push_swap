@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:27:51 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 17:57:00 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 17:25:59 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int		determine_place(int place, t_data a);
 int		set_more(t_data *a, int argc, char **argv);
 int		set_two(t_data *a, char **argv);
 int		sort_tab(int **tabl, int *found, t_data, t_data b);
+int		get_perfect_pos(int top, t_data a);
 
 #endif

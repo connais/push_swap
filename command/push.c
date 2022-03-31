@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 13:55:26 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 15:45:44 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:31:56 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	moove_top(t_data *b)
 int	push_a(t_data *a, t_data *b)
 {
 	push_top(a, b);
+	ft_printf("pa\n");
 	moove_top(b);
 	return (0);
 }
@@ -64,6 +65,7 @@ int	push_a(t_data *a, t_data *b)
 int	push_b(t_data *a, t_data *b)
 {
 	push_top(b, a);
+	ft_printf("pb\n");
 	moove_top(a);
 	return (0);
 }

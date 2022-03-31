@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 19:00:15 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 15:42:52 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:38:14 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,12 @@ int	sort_tab_x(int **tabl, int *found, t_data a, t_data b)
 	while (x > 0)
 	{
 		rotate_ra(&a, &b);
-		ft_printf("ra\n");
 		x--;
 		found[1]--;
 	}
 	while (x < 0)
 	{
 		reverse_rra(&a, &b);
-		ft_printf("rra\n");
 		x++;
 		found[1]--;
 	}
@@ -97,20 +95,17 @@ int	sort_tab(int **tabl, int *found, t_data a, t_data b)
 	while (y > 0)
 	{
 		rotate_rb(&a, &b);
-		ft_printf("rb\n");
 		y--;
 		found[1]--;
 	}
 	while (y < 0)
 	{
 		reverse_rrb(&a, &b);
-		ft_printf("rrb\n");
 		y++;
 		found[1]--;
 	}
 	sort_tab_x(tabl, found, a, b);
 	a.len++;
 	push_a(&a, &b);
-	ft_printf("pa\n");
 	return (0);
 }

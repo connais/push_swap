@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:05:36 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 16:21:38 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:35:37 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ int	swap_tab(t_data *stack)
 int	swap_sa(t_data *a, t_data *b)
 {
 	(void) b;
+	ft_printf("sa\n");
 	return (swap_tab(a));
 }
 
 int	swap_sb(t_data *a, t_data *b)
 {
 	(void) a;
+	ft_printf("sb\n");
 	return (swap_tab(b));
 }
 
@@ -40,6 +42,7 @@ int	swap_ss(t_data *a, t_data *b)
 {
 	swap_tab(a);
 	swap_tab(b);
+	ft_printf("sb\n");
 	return (0);
 }
 /*

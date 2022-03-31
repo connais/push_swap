@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:25:27 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/25 14:45:21 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:49:01 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	make_push_swap(t_data *a, t_data *b)
 	len = a->len;
 	if (is_little_tab(a, b) == 1)
 		return (1);
-	place_it_on_top(a, min(*a));
 	get_lis(a);
 	if (!a->lis || !a->sub)
 		return (1);

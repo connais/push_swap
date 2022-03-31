@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 15:39:31 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:37:01 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,9 @@ void	make_b(t_data *a, t_data *b)
 				var.x++;
 		}
 		if (var.x == 0)
-		{
 			push_b(a, b);
-			ft_printf("pb\n");
-		}
 		else
-		{
 			rotate_ra(a, b);
-			ft_printf("ra\n");
-		}
 		var.x = 0;
 		var.i = -1;
 	}

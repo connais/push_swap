@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:27:32 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 18:17:17 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 21:17:40 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 void	push_in_b(t_data *a, t_data *b, int pos)
 {
-	if (pos > a->len / 2)
+	if (pos < 0)
 	{
-		while (pos < a->len)
+		while (pos < 0)
 		{
 			reverse_rra(a, b);
-			ft_printf("rra\n");
 			pos++;
 		}
 		push_b(a, b);
-		ft_printf("pb\n");
 	}
-	else
+	else if (pos > 0)
 	{
 		while (pos > 0)
 		{
 			rotate_ra(a, b);
-			ft_printf("ra\n");
 			pos--;
 		}
 		push_b(a, b);
-		ft_printf("pa\n");
 	}
+	else
+		push_b(a, b);
 }
 
 int	sort_tab_3(t_data *a, t_data *b)
@@ -45,17 +43,14 @@ int	sort_tab_3(t_data *a, t_data *b)
 	if (a->tab[0] > a->tab[1])
 	{
 		swap_sa(a, b);
-		ft_printf("sa\n");
 	}
 	if (a->tab[1] > a->tab[2])
 	{
 		reverse_rra(a, b);
-		ft_printf("rra\n");
 	}
 	if (a->tab[0] > a->tab[1])
 	{
 		swap_sa(a, b);
-		ft_printf("sa\n");
 	}
 	return (0);
 }
@@ -68,21 +63,28 @@ void	sort_tab_5(t_data *a, t_data *b)
 	if (check_if_sort(*a) == 0)
 		return ;
 	count = 2;
-	b->tab = malloc(sizeof(int) * count);
-	b->len = count;
+	b->tab = malloc(sizeof(int) * 2);
+	b->len = 2;
+	j = 0;
 	while (count > 0)
-	{
-		j = look_for_smallest_num(*a);
+	{	j = indice_min(*a);
+//		ft_printf("j : %d\n", j);
 		push_in_b(a, b, j);
-		ft_printf("pb\n");
 		count--;
 	}
 	sort_tab_3(a, b);
+	a->len++;
 	push_a(a, b);
-	ft_printf("pa\n");
+	a->len++;
 	push_a(a, b);
-	ft_printf("pa\n");
 	free(b->tab);
+//	j = 0;
+//	while ( j < a->len)
+//	{
+//		ft_printf("a->tab[%d] : %d\n", j, a->tab[j]);
+//		j++;
+//	}
+	final_move(a);
 }
 
 int	sort_tab_2(t_data *a, t_data *b)
@@ -90,7 +92,6 @@ int	sort_tab_2(t_data *a, t_data *b)
 	if (a->tab[0] > a->tab[1])
 	{
 		swap_sa(a, b);
-		ft_printf("sa\n");
 	}
 }
 

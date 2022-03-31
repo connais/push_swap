@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:42 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/24 16:14:02 by avaures          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:14:57 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ int	reverse_rotate_tab(t_data *stack)
 int	reverse_rra(t_data *a, t_data *b)
 {
 	(void) b;
+	ft_printf("rra\n");
 	return (reverse_rotate_tab(a));
 }
 
 int	reverse_rrb(t_data *a, t_data *b)
 {
 	(void) a;
+	ft_printf("rrb\n");
 	return (reverse_rotate_tab(b));
 }
 
@@ -51,6 +53,7 @@ int	reverse_rrr(t_data *a, t_data *b)
 {
 	return (reverse_rotate_tab(a));
 	return (reverse_rotate_tab(b));
+	ft_printf("rrr\n");
 	return (0);
 }
 /*
