@@ -6,7 +6,7 @@
 /*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 15:27:32 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/31 21:17:40 by avaures          ###   ########.fr       */
+/*   Updated: 2022/04/04 14:41:00 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	push_in_b(t_data *a, t_data *b, int pos)
 
 int	sort_tab_3(t_data *a, t_data *b)
 {
-	int	tmp;
-
 	if (a->tab[0] > a->tab[1])
 	{
 		swap_sa(a, b);
@@ -67,8 +65,8 @@ void	sort_tab_5(t_data *a, t_data *b)
 	b->len = 2;
 	j = 0;
 	while (count > 0)
-	{	j = indice_min(*a);
-//		ft_printf("j : %d\n", j);
+	{	
+		j = indice_min(*a);
 		push_in_b(a, b, j);
 		count--;
 	}
@@ -78,12 +76,6 @@ void	sort_tab_5(t_data *a, t_data *b)
 	a->len++;
 	push_a(a, b);
 	free(b->tab);
-//	j = 0;
-//	while ( j < a->len)
-//	{
-//		ft_printf("a->tab[%d] : %d\n", j, a->tab[j]);
-//		j++;
-//	}
 	final_move(a);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avaures <avaures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:25:27 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/31 15:49:01 by avaures          ###   ########.fr       */
+/*   Updated: 2022/04/04 15:50:06 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	big_sort(t_data *a, t_data *b)
 	int	**tabl;
 	int	len;
 
-	tabl = set_tab_sort(tabl, b);
+	tabl = tab_sort(tabl, b);
 	found = malloc(sizeof(int) * 2);
 	if (!tabl || !found)
 		return ;

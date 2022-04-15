@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avaures <avaures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:27:51 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/31 17:25:59 by avaures          ###   ########.fr       */
+/*   Updated: 2022/04/04 15:49:00 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		min(t_data a);
 int		maxi(t_data a);
 int		indice_min(t_data a);
 int		indice_max(t_data a);
-int		**set_tab_sort(int **tabl, t_data *b);
+int		**tab_sort(int **tabl, t_data *b);
 int		*tabl_diff(int place, t_data a);
 int		determine_place(int place, t_data a);
 int		set_more(t_data *a, int argc, char **argv);

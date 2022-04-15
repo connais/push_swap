@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lismore.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avaures <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: avaures <avaures@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 11:06:50 by avaures           #+#    #+#             */
-/*   Updated: 2022/03/31 15:37:01 by avaures          ###   ########.fr       */
+/*   Updated: 2022/04/04 15:52:47 by avaures          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	make_b(t_data *a, t_data *b)
 	free(a->sub);
 }
 
-int	**set_tab_sort(int **tabl, t_data *b)
+int	**tab_sort(int **tabl, t_data *b)
 {
 	int	i;
 
